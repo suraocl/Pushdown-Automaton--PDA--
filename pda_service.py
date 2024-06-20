@@ -1,5 +1,4 @@
-# pda_service.py
-# Bu dosya, Pushdown Automaton (PDA) simülasyonunu gerçekleştiren soyut sınıfı içerir.
+#soyut sınıf
 
 from abc import ABC, abstractmethod
 
