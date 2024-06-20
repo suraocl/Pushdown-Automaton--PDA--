@@ -1,6 +1,3 @@
-# matematiksel_pda.py
-# Bu dosya, PDAService soyut sınıfından türeyen ve matematiksel ifadeleri kontrol eden sınıfı içerir.
-
 from pda_service import PDAService
 
 class MatematikselPDA(PDAService):
@@ -10,38 +7,42 @@ class MatematikselPDA(PDAService):
     def process_character(self, char):
         print(f"Mevcut Durum: {self.state}, Yığın: {self.stack}, İşlenen Karakter: {char}")
 
-        if self.state == 'baslangic':
+        if self.state == 'q0':
+            # Başlangıç durumunda rakam veya '(' beklenir
             if char.isdigit():
-                self.state = 'sayi'
+                self.state = 'q1'
             elif char == '(':
                 self.stack.append('(')
             else:
                 print("Hata: Başlangıç durumunda geçersiz karakter")
                 return False
 
-        elif self.state == 'sayi':
+        elif self.state == 'q1':
+            # Sayı durumunda operatör, ')' veya '(' beklenir
             if char in '+-*/':
-                self.state = 'operator'
+                self.state = 'q2'
             elif char == ')':
                 if not self.stack or self.stack.pop() != '(':
                     print("Hata: Sayı durumunda eşleşmeyen parantez")
                     return False
-                self.state = 'sayi'
+                self.state = 'q1'
             elif char == '(':
                 self.stack.append('(')
-                self.state = 'baslangic'
+                self.state = 'q0'
             else:
                 print("Hata: Sayı durumunda geçersiz karakter")
                 return False
 
-        elif self.state == 'operator':
+        elif self.state == 'q2':
+            # Operatör durumunda rakam veya '(' beklenir
             if char.isdigit():
-                self.state = 'sayi'
+                self.state = 'q1'
             elif char == '(':
                 self.stack.append('(')
-                self.state = 'baslangic'
+                self.state = 'q0'
             else:
                 print("Hata: Operatör durumunda geçersiz karakter")
                 return False
 
+        print(f"Yeni Durum: {self.state}, Yığın: {self.stack}")
         return True

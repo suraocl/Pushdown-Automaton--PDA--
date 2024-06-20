@@ -1,10 +1,12 @@
 # calculate/calculator.py
 # Bu dosya, matematiksel ifadelerin sonucunu hesaplayan fonksiyonu içerir.
 
-def evaluate_expression(expression):
+def ifadeyi_degerlendir(ifade):
     try:
-        result = eval(expression)
-        return result
+        # İfadeyi değerlendir ve sonucu döndür
+        sonuc = eval(ifade)
+        return sonuc
     except Exception as e:
+        # Hata durumunda mesaj yazdır ve None döndür
         print(f"İfade değerlendirilirken hata: {e}")
         return None
