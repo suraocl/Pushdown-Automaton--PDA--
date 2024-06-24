@@ -9,8 +9,7 @@ def main():
         elif ifade.strip() == '':
             print("Bu bir matematiksel ifade değildir.")
             continue
-        
-        # PDA nesnesi oluşturma
+
         pda = MatematikselPDA()
     
         if pda.ifadeyi_dogrula(ifade):
